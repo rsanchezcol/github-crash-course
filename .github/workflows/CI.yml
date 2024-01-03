@@ -44,16 +44,21 @@ jobs:
     - name: List Files
       run: |
         ls -l
-        echo "exit_code=$?" >> $GITHUB_STATE
+        echo $?
+        echo "exit_code=$?" >> $GITHUB_OUTPUT
       id: list_files
     - name: Echo Hello World
       run: |
         echo "Hello World"
-        echo "exit_code=$?" >> $GITHUB_STATE
+        echo $?
+        echo "exit_code=$?" >> $GITHUB_OUTPUT
       id: echo_hello
     - name: Display Results
       run: |
         echo "Step 1 - Checkout Repository: ${{ job.status }}"
         echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.outputs.exit_code }})"
         echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.outputs.exit_code }})"
+        echo ${{ GITHUB_OUTPUT }}
+        echo " "
+        echo $GITHUB_OUTPUT
       if: always()

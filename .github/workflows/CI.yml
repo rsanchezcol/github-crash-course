@@ -44,12 +44,12 @@ jobs:
     - name: List Files
       run: |
         ls -l
-        echo "::set-output name=exit_code::$?"
+        cho "exit_code=$?" >> $GITHUB_STATE
       id: list_files
     - name: Echo Hello World
       run: |
         echo "Hello World"
-        echo "::set-output name=exit_code::$?"
+        echo "exit_code=$?" >> $GITHUB_STATE
       id: echo_hello
     - name: Display Results
       run: |

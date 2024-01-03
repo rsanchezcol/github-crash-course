@@ -35,24 +35,25 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
   build:
+    needs: test
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
     - name: List Files
-      run: ls -l
+      run: |
+        ls -l
+        echo "::set-output name=exit_code::$?"
       id: list_files
-      continue-on-error: true
-
     - name: Echo Hello World
-      run: echo "Hello World"
+      run: |
+        echo "Hello World"
+        echo "::set-output name=exit_code::$?"
       id: echo_hello
-
     - name: Display Results
       run: |
         echo "Step 1 - Checkout Repository: ${{ job.status }}"
-        echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.exit_code }})"
-        echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.exit_code }})"
+        echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.outputs.exit_code }})"
+        echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.outputs.exit_code }})"
       if: always()

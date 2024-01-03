@@ -51,7 +51,7 @@ jobs:
       continue-on-error: true
     - name: Echo Hello World
       run: |
-        echo "Hello World" || exit_code=$?
+        echowe "Hello World" || exit_code=$?
         echo $exit_code
         echo "exit_code_step3=$exit_code" >> $GITHUB_OUTPUT
         echo "exit_code=$exit_code" >> GITHUB_OUTPUT

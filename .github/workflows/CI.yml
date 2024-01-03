@@ -43,6 +43,7 @@ jobs:
     - name: List Files
       run: |
         lsl -l || echo "exit_code_step2=$?" >> $GITHUB_OUTPUT
+        exit $?
       id: list_files
       continue-on-error: true
     - name: Echo Hello World

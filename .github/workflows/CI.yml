@@ -58,5 +58,4 @@ jobs:
         echo "Step 1 - Checkout Repository: ${{ job.status }}"
         echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.outputs.exit_code }})"
         echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.outputs.exit_code }})"
-        echo ${{ GITHUB_OUTPUT }}
       if: always()

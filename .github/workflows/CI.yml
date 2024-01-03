@@ -43,7 +43,7 @@ jobs:
 
     - name: List Files
       run: |
-        ls -l
+        lsl -l
         echo $?
         echo "exit_code=$?" >> $GITHUB_OUTPUT
       id: list_files

@@ -44,7 +44,7 @@ jobs:
     - name: List Files
       run: |
         ls -l
-        cho "exit_code=$?" >> $GITHUB_STATE
+        echo "exit_code=$?" >> $GITHUB_STATE
       id: list_files
     - name: Echo Hello World
       run: |

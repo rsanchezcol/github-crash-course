@@ -42,21 +42,21 @@ jobs:
       uses: actions/checkout@v3
     - name: List Files
       run: |
-        lsl -l || exit_code=$? || echo "exit_code=$exit_code" >> $GITHUB_OUTPUT
+        lsl -l || exit_code=$? || echo "exit_code_step2=$exit_code" >> $GITHUB_OUTPUT
         exit $exit_code
       id: list_files
       continue-on-error: true
     - name: Echo Hello World
       run: |
-        echo "Hello World" || exit_code=$? || echo "exit_code=$exit_code" >> $GITHUB_OUTPUT
+        echo "Hello World" || exit_code=$? || echo "exit_code_step3=$exit_code" >> $GITHUB_OUTPUT
         exit $exit_code
       id: echo_hello
       continue-on-error: true
     - name: Display Results
       run: |
         echo "Step 1 - Checkout Repository: ${{ job.status }}"
-        echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.outputs.exit_code }})"
-        echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.outputs.exit_code }})"
-        echo "Step 2 Stdout: ${{ steps.test.outputs.* }}"
-        echo "Step 3 Stdout: ${{ steps.build.outputs.* }}"
+        echo "Step 2 - List Files: ${{ steps.list_files.outcome }} (Exit Code: ${{ steps.list_files.outputs.exit_code_step2 }})"
+        echo "Step 3 - Echo Hello World: ${{ steps.echo_hello.outcome }} (Exit Code: ${{ steps.echo_hello.outputs.exit_code_step3 }})"
+        echo "Step 2 Stdout: ${{ steps.test.outputs }}"
+        echo "Step 3 Stdout: ${{ steps.build.outputs }}"
       if: always()

@@ -40,19 +40,20 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
-
     - name: List Files
       run: |
         lsl -l
         echo $?
         echo "exit_code=$?" >> $GITHUB_OUTPUT
       id: list_files
+      continue-on-error: true
     - name: Echo Hello World
       run: |
         echo "Hello World"
         echo $?
         echo "exit_code=$?" >> $GITHUB_OUTPUT
       id: echo_hello
+      continue-on-error: true
     - name: Display Results
       run: |
         echo "Step 1 - Checkout Repository: ${{ job.status }}"

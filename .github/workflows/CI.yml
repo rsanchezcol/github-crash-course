@@ -81,8 +81,8 @@ jobs:
         echo "Step 2 Stdout: ${{join(steps.test.outputs.*, '\n')}}"
         echo "Step 3 Stdout: ${{join(steps.echo_hello.outputs.*, '\n')}}"
         echo "WORKFLOW SUMMARY URL: ${{ env.workflow_url_summary }}"
-        echo '${{ github.event.env }}'
-        echo '${{ github.event.state }}'
+        echo '${{ github.env }}'
+        echo '${{ github.state }}'
         echo "Env: $infosteps"
         echo "${{ toJson(github) }}"
       if: always()

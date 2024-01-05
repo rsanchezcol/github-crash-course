@@ -26,17 +26,23 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Checks Your Repository
+        uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: |
+          echo Hello, world!
+          info="runone success<br>"
+          echo "infosteps=$info" >> $GITHUB_ENV
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          info="run multiline success<br>"
+          echo "infosteps+=$info" >> $GITHUB_ENV
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -46,6 +52,8 @@ jobs:
     - name: List Files
       run: |
         lsl -l || exit_code=$?
+        info="list files<br>"
+        echo "infosteps+=$info" >> $GITHUB_ENV
         echo $exit_code
         echo "exit_code_step2=$exit_code" >> $GITHUB_OUTPUT
         echo "exit_code=$exit_code" >> GITHUB_OUTPUT
@@ -56,6 +64,8 @@ jobs:
       run: |
         echowe "Hello World" || exit_code=$?
         echo $exit_code
+        info="hello world<br>"
+        echo "infosteps+=$info" >> $GITHUB_ENV
         echo "exit_code_step3=$exit_code" >> $GITHUB_OUTPUT
         echo "exit_code=$exit_code" >> GITHUB_OUTPUT
         exit $exit_code
@@ -71,5 +81,6 @@ jobs:
         echo "Step 2 Stdout: ${{join(steps.test.outputs.*, '\n')}}"
         echo "Step 3 Stdout: ${{join(steps.echo_hello.outputs.*, '\n')}}"
         echo "WORKFLOW SUMMARY URL: ${{ env.workflow_url_summary }}"
+        echo "$infosteps"
         echo "${{ toJson(github) }}"
       if: always()
